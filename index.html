@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>KODA PESQUISA</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--soft:#eef2f7;--txt:#111827;--muted:#64748b;--pri:#2563eb;--danger:#dc2626;--ok:#16a34a;--border:#dbe2ea;--shadow:0 10px 30px #0f172a12}
+*{box-sizing:border-box}html,body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--txt)}
+body.dark{--bg:#0b1120;--card:#111827;--soft:#1e293b;--txt:#f8fafc;--muted:#94a3b8;--border:#334155;--shadow:0 10px 30px #0005}
+button,input,select{font:inherit}button{cursor:pointer}.app{min-height:100vh;padding-bottom:90px}
+.top{position:sticky;top:0;z-index:20;background:#0f172af5;color:#fff;padding:13px 15px;box-shadow:0 4px 18px #0003}
+.toprow{display:flex;justify-content:space-between;align-items:center}.brand{font-size:20px;font-weight:900}.ver{font-size:10px;color:#cbd5e1}
+.topactions{display:flex;gap:7px}.topactions button{width:40px;height:40px;border:0;border-radius:12px;background:#ffffff14;color:#fff;font-size:19px;position:relative}.topactions button.on::after{content:"";position:absolute;top:5px;right:5px;width:8px;height:8px;border-radius:50%;background:var(--ok);border:2px solid #0f172a}
+main{max-width:960px;margin:auto;padding:16px 13px}.hero{background:linear-gradient(135deg,#2563eb,#4f46e5);color:white;border-radius:22px;padding:18px;box-shadow:var(--shadow)}
+.hero h1{margin:0;font-size:23px}.hero p{margin:4px 0 14px;color:#dbeafe;font-size:12px}
+.search{position:relative}.search input{width:100%;height:53px;border:0;border-radius:15px;padding:0 48px 0 15px;outline:0;font-size:15px}.search button{position:absolute;right:6px;top:6px;width:41px;height:41px;border:0;border-radius:11px;background:#eef2ff;color:#334155;font-size:20px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:13px 0}.stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:11px;box-shadow:var(--shadow)}.stat b{display:block;font-size:19px}.stat span{font-size:10px;color:var(--muted)}
+.tools{display:flex;gap:8px;overflow:auto;padding:2px 0 10px}.chip{white-space:nowrap;border:1px solid var(--border);background:var(--card);color:var(--txt);border-radius:999px;padding:8px 11px;font-size:11px}.chip.active{background:#dbeafe;border-color:#93c5fd;color:#1d4ed8;font-weight:800}
+.heading{display:flex;align-items:center;justify-content:space-between;margin:5px 2px 10px}.heading h2{font-size:16px;margin:0}.muted{color:var(--muted);font-size:11px}
+.list{display:grid;gap:6px}.card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:9px 11px;box-shadow:var(--shadow)}.cardtop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.name{border:0;background:none;color:#2563eb;font-weight:850;text-align:left;padding:0;font-size:13px;line-height:1.25}.price{font-weight:900;white-space:nowrap;font-size:13px}.meta{color:var(--muted);font-size:9px;margin-top:3px}.badge{display:inline-flex;align-items:center;gap:5px;background:var(--soft);border-radius:999px;padding:3px 7px;font-size:9px;margin-top:4px}.dot{width:7px;height:7px;border-radius:50%;display:inline-block}.actions{display:flex;gap:6px;margin-top:7px}.btn{border:1px solid var(--border);background:var(--card);color:var(--txt);border-radius:9px;padding:5px 9px;font-size:10px}.btn.danger{color:#b91c1c}.empty{text-align:center;padding:34px 15px;background:var(--card);border:1px dashed var(--border);border-radius:16px;color:var(--muted);font-size:12px}
+.fab{position:fixed;z-index:30;right:17px;bottom:17px;width:57px;height:57px;border:0;border-radius:18px;background:#2563eb;color:#fff;font-size:28px;box-shadow:0 12px 28px #2563eb55}
+.back{display:none;position:fixed;inset:0;z-index:100;background:#020617a8;padding:12px;align-items:flex-end;justify-content:center}.back.open{display:flex}.modal{width:min(690px,100%);max-height:93vh;overflow:auto;background:var(--card);border-radius:23px;padding:17px;box-shadow:0 25px 80px #0007}.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.modal h3{margin:0;font-size:18px}.close{width:39px;height:39px;border:0;border-radius:11px;background:var(--soft);color:var(--txt);font-size:20px}
+.form{display:grid;gap:11px}.field label{display:block;font-size:11px;font-weight:800;margin-bottom:5px}.field input,.field select{width:100%;height:46px;border:1px solid var(--border);border-radius:12px;padding:0 12px;outline:0;background:var(--card);color:var(--txt)}.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.primary,.secondary,.dangerfull{width:100%;height:46px;border-radius:12px;font-weight:800}.primary{border:0;background:var(--pri);color:#fff}.secondary{border:1px solid var(--border);background:var(--soft);color:var(--txt)}.dangerfull{border:0;background:#fee2e2;color:#991b1b}.modalactions{display:grid;gap:8px;margin-top:13px}
+.notice{background:var(--soft);border-radius:11px;padding:10px;font-size:10px;color:var(--muted);line-height:1.5}.history{margin-top:11px}.event{border-left:4px solid #94a3b8;background:var(--soft);border-radius:10px;padding:10px;margin-bottom:7px}.event b{font-size:11px}.event div{font-size:10px;color:var(--muted);margin-top:3px}
+.catrow{display:flex;gap:9px;align-items:center;padding:9px;border:1px solid var(--border);border-radius:12px;margin-bottom:7px}.catrow input[type=color]{width:31px;height:31px;padding:0;border:0;background:none}.catrow span{flex:1;font-size:12px;font-weight:750}
+.tutstep{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}.tutstep:last-child{border-bottom:0}.tutnum{flex:0 0 26px;height:26px;border-radius:50%;background:var(--pri);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}.tutbody b{display:block;font-size:12px;margin-bottom:2px}.tutbody div{font-size:11px;color:var(--muted);line-height:1.5}
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.menu button{min-height:62px;border:1px solid var(--border);border-radius:13px;background:var(--card);color:var(--txt);text-align:left;padding:10px}.menu b{display:block;font-size:12px}.menu small{color:var(--muted);font-size:9px}
+.toast{position:fixed;z-index:200;left:50%;bottom:88px;transform:translateX(-50%) translateY(20px);opacity:0;background:#0f172a;color:#fff;padding:10px 14px;border-radius:11px;font-size:11px;transition:.2s;pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* v1.3.0 — refinamento visual */
+.search button{display:none}.search button.visible{display:block}
+.card{position:relative;padding:8px 10px 7px;border-left:3px solid var(--cat,#64748b);background:var(--card)}
+.card::before{content:"";position:absolute;inset:0;z-index:0;border-radius:12px;background:var(--card);opacity:.94;pointer-events:none}
+.cardmain,.actions{position:relative;z-index:1}
+.cardmain{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0}
+.productinfo{min-width:0;flex:1}.name{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.price{font-size:14px;line-height:1.1}
+.meta{margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.category-badge{margin-top:3px;padding:2px 6px;background:color-mix(in srgb,var(--cat,#64748b) 10%,var(--card));border:1px solid color-mix(in srgb,var(--cat,#64748b) 20%,var(--border));color:var(--txt)}
+.actions{margin-top:5px;justify-content:flex-end}
+.btn{padding:4px 8px;font-size:10px}
+.btn.danger{background:transparent}
+.empty{display:flex;flex-direction:column;align-items:center;gap:7px;padding:32px 18px}
+.empty strong{font-size:14px;color:var(--txt)}.empty span{max-width:340px;line-height:1.5}.emptyicon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:var(--soft);color:var(--pri);font-size:25px}.empty-action{width:min(280px,100%);margin-top:5px}
+.app-footer{display:flex;justify-content:center;align-items:center;gap:7px;padding:18px 12px 25px;color:var(--muted);font-size:10px;letter-spacing:.03em}
+.app-footer strong{color:var(--txt);font-size:10px}.app-footer span{padding-left:7px;border-left:1px solid var(--border)}
+.modal-sub{margin-top:3px;color:var(--muted);font-size:10px}
+@media(min-width:700px){.list{grid-template-columns:repeat(2,1fr)}.back{align-items:center}.modal{border-radius:20px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+ <div class="toprow">
+  <div><div class="brand">KODA PESQUISA</div><div class="ver">Banco inteligente de produtos</div></div>
+  <div class="topactions"><button id="accountBtn" title="Conta">👤</button><button id="menuBtn" title="Ferramentas">☷</button><button id="themeBtn" title="Tema">☾</button></div>
+ </div>
+</header>
+<main>
+<section class="hero">
+ <h1>Encontre um produto</h1><p>Pesquise por código, nome ou preço. Toque no nome para editar.</p>
+ <div class="search"><input id="q" placeholder="Código, nome ou preço..." autocomplete="off" aria-label="Pesquisar produtos"><button id="clear" title="Limpar pesquisa" aria-label="Limpar pesquisa">×</button></div>
+</section>
+<div class="stats"><div class="stat"><b id="total">0</b><span>Produtos</span></div><div class="stat"><b id="cats">0</b><span>Categorias</span></div><div class="stat"><b id="found">0</b><span>Resultados</span></div></div>
+<div class="tools" id="chips"></div>
+<div class="heading"><h2>Produtos</h2><span class="muted" id="count"></span></div>
+<section class="list" id="list"></section>
+</main>
+<button class="fab" id="add" title="Cadastrar produto" aria-label="Cadastrar produto">+</button>
+<footer class="app-footer"><strong>KODA PESQUISA</strong><span>v1.3.0</span></footer>
+</div>
+<div class="back" id="back"><div class="modal" id="modal"></div></div>
+<div class="toast" id="toast"></div>
+<input id="file" type="file" accept=".json,.csv,application/json,text/csv" hidden>
+<script>
+"use strict";
+const APPVER="1.3.0";
+const KP={products:"koda_pesquisa_products_v2",cats:"koda_pesquisa_categories_v2",history:"koda_pesquisa_history_v2",trash:"koda_pesquisa_trash_v1",theme:"koda_pesquisa_theme"};
+let products=read(KP.products)||[], cats=read(KP.cats)||[], history=read(KP.history)||[], trash=read(KP.trash)||[];
+let active="TODAS",editing=null;
+/* CONEXÃO DE CONTA (Firebase Auth + Firestore) — SUBSTITUA pelos dados do seu projeto Firebase antes de usar. Veja o README. */
+const FIREBASE_CONFIG={apiKey:"SUBSTITUA_API_KEY",authDomain:"SUBSTITUA.firebaseapp.com",projectId:"SUBSTITUA_PROJECT_ID",storageBucket:"SUBSTITUA.appspot.com",messagingSenderId:"SUBSTITUA_SENDER_ID",appId:"SUBSTITUA_APP_ID"};
+let cloudUser=null,cloudReady=false,unsubSnapshot=null,cloudSyncTimer=null;
+function loadScript(src){return new Promise((res,rej)=>{let s=document.createElement("script");s.src=src;s.onload=res;s.onerror=()=>rej(new Error("Falha ao carregar "+src));document.head.appendChild(s)})}
+const FIREBASE_CONFIG_READY=Object.values(FIREBASE_CONFIG).every(v=>v&&String(v).indexOf("SUBSTITUA")===-1);
+const KODA_LIBS_READY=(async()=>{
+ if(!FIREBASE_CONFIG_READY)return false;
+ try{
+  await loadScript("https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js");
+  await Promise.all([loadScript("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"),loadScript("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js")]);
+  firebase.initializeApp(FIREBASE_CONFIG);
+  return true;
+ }catch(err){console.warn("KODA: bibliotecas de nuvem não carregadas.",err);return false}
+})();
+const palette=["#2563eb","#16a34a","#ea580c","#9333ea","#0891b2","#db2777","#ca8a04","#475569","#059669","#dc2626","#7c3aed","#0f766e"];
+const $=s=>document.querySelector(s), uid=()=>crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2);
+const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+const money=n=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(n)||0);
+function read(k){try{return JSON.parse(localStorage.getItem(k))}catch{return null}}
+function write(k,v){localStorage.setItem(k,JSON.stringify(v));scheduleCloudSync()}
+function scheduleCloudSync(){if(!cloudUser)return;clearTimeout(cloudSyncTimer);cloudSyncTimer=setTimeout(()=>{firebase.firestore().collection("usuarios").doc(cloudUser.uid).set({products,cats,history,trash,updatedAt:new Date().toISOString()},{merge:true}).catch(()=>toast("Falha ao sincronizar com a nuvem."))},700)}
+function toast(s){let t=$("#toast");t.textContent=s;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("show"),2200)}
+function log(type,detail){history.unshift({id:uid(),type,detail,date:new Date().toISOString()});history=history.slice(0,2000);write(KP.history,history)}
+function catColor(n){return cats.find(c=>c.name.toUpperCase()===String(n||"").toUpperCase())?.color||"#64748b"}
+function normalizePrice(v){let s=String(v??"").trim().replace(/^R\$\s*/i,"").replace(/\s/g,"");if(!s)return NaN;if(s.includes(","))s=s.replace(/\./g,"").replace(",",".");return Number(s)}
+function filtered(){let q=$("#q").value.trim().toLowerCase();return products.filter(p=>(active==="TODAS"||String(p.category||"").toUpperCase()===active)&&(!q||[p.code,p.name,p.price,money(p.price),String(p.price).replace(".",","),p.category,p.brand].some(x=>String(x??"").toLowerCase().includes(q))))}
+function render(){
+ let arr=filtered();
+ $("#total").textContent=products.length;
+ $("#cats").textContent=cats.length;
+ $("#found").textContent=arr.length;
+ $("#count").textContent=arr.length===1?"1 encontrado":`${arr.length} encontrados`;
+ $("#clear").classList.toggle("visible",Boolean($("#q").value));
+ $("#chips").innerHTML=[{name:"TODAS",color:"#2563eb"},...cats].map(c=>`<button class="chip ${active===c.name.toUpperCase()?"active":""}" data-cat="${esc(c.name.toUpperCase())}"><i class="dot" style="background:${esc(c.color)}"></i>${esc(c.name)}</button>`).join("");
+ if(arr.length){
+  $("#list").innerHTML=arr.map(p=>{
+   const cc=catColor(p.category);
+   return `<article class="card" style="--cat:${esc(cc)}">
+    <div class="cardmain">
+     <div class="productinfo">
+      <button class="name" data-edit="${esc(p.id)}">${esc(p.name)}</button>
+      <div class="badge category-badge"><i class="dot" style="background:${esc(cc)}"></i>${esc(p.category||"Sem categoria")}</div>
+      <div class="meta">${p.code?`Código: ${esc(p.code)}`:"Código não informado"}${p.brand?` • ${esc(p.brand)}`:""}</div>
+     </div>
+     <div class="price">${money(p.price)}</div>
+    </div>
+    <div class="actions"><button class="btn" data-edit="${esc(p.id)}">Editar</button><button class="btn danger" data-del="${esc(p.id)}">Excluir</button></div>
+   </article>`;
+  }).join("");
+ }else if(products.length===0){
+  $("#list").innerHTML=`<div class="empty empty-start"><div class="emptyicon">＋</div><strong>Seu banco está pronto para começar</strong><span>Ainda não há produtos cadastrados. Cadastre o primeiro produto ou importe uma base existente.</span><button class="primary empty-action" id="emptyAdd">Cadastrar primeiro produto</button></div>`;
+  $("#emptyAdd").onclick=()=>form();
+ }else{
+  $("#list").innerHTML=`<div class="empty"><div class="emptyicon">⌕</div><strong>Nenhum produto encontrado</strong><span>Tente outro nome, código, preço ou categoria.</span><button class="secondary empty-action" id="emptyClear">Limpar pesquisa</button></div>`;
+  $("#emptyClear").onclick=()=>{$("#q").value="";active="TODAS";render();$("#q").focus()};
+ }
+}
+function open(content){$("#modal").innerHTML=content;$("#back").classList.add("open")}
+function close(){$("#back").classList.remove("open");$("#modal").innerHTML=""}
+function categoryOptions(selected){return cats.map(c=>`<option value="${esc(c.name)}" ${String(selected||"").toUpperCase()===c.name.toUpperCase()?"selected":""}>${esc(c.name)}</option>`).join("")}
+function form(id=null){
+ editing=id;let p=id?products.find(x=>x.id===id):null;
+ open(`<div class="modalhead"><div><h3>${p?"Editar produto":"Cadastrar produto"}</h3><div class="modal-sub">${p?"Alterações no produto selecionado":"Preencha os dados principais para adicionar um produto"}</div></div><button class="close" id="x" aria-label="Fechar">×</button></div>
+ <form class="form" id="form"><div class="field"><label>Nome do produto *</label><input id="name" required maxlength="180" value="${esc(p?.name||"")}"></div>
+ <div class="row"><div class="field"><label>Código (opcional)</label><input id="code" maxlength="60" value="${esc(p?.code||"")}"></div><div class="field"><label>Preço *</label><input id="price" required inputmode="decimal" value="${p?String(p.price).replace(".",","):""}" placeholder="0,00"></div></div>
+ <div class="field"><label>Categoria</label><select id="category"><option value="">Sem categoria</option>${categoryOptions(p?.category)}</select></div>
+ <div class="modalactions"><button class="primary">Salvar</button><button type="button" class="secondary" id="catsBtn">Gerenciar categorias</button>${p?'<button type="button" class="dangerfull" id="delEdit">Mover para lixeira</button>':""}</div></form>`);
+ $("#x").onclick=close;$("#catsBtn").onclick=categoriesModal;
+ if(p)$("#delEdit").onclick=()=>remove(p.id);
+ $("#form").onsubmit=e=>{e.preventDefault();let name=$("#name").value.trim(),code=$("#code").value.trim(),price=normalizePrice($("#price").value),category=$("#category").value;
+  if(!name){toast("Informe o nome.");return}if(!Number.isFinite(price)||price<0){toast("Informe um preço válido.");return}
+  if(id){let i=products.findIndex(x=>x.id===id),old=products[i];products[i]={...old,name,code,price,category};write(KP.products,products);let ch=[];if(old.name!==name)ch.push("nome");if(old.code!==code)ch.push("código");if(Number(old.price)!==price)ch.push("preço");if(old.category!==category)ch.push("categoria");log("EDIÇÃO",`${name} — campos alterados: ${ch.length?ch.join(", "):"nenhum"}`);toast("Produto atualizado.")}else{products.unshift({id:uid(),name,code,price,category,brand:""});write(KP.products,products);log("CADASTRO",`${name} — ${money(price)}`);toast("Produto cadastrado.")}close();render();
+ }
+}
+function remove(id){let p=products.find(x=>x.id===id);if(!p)return;confirmBox("Mover para a lixeira?",`<b>${esc(p.name)}</b> será removido da pesquisa, mas ficará na lixeira para restauração.`,()=>{products=products.filter(x=>x.id!==id);trash.unshift({...p,deletedAt:new Date().toISOString()});write(KP.products,products);write(KP.trash,trash);log("EXCLUSÃO",`${p.name} — enviado para a lixeira`);close();render();toast("Produto enviado para a lixeira.")})}
+function confirmBox(title,body,yes){open(`<div class="modalhead"><h3>${title}</h3><button class="close" id="x">×</button></div><div class="notice">${body}</div><div class="modalactions"><button class="dangerfull" id="yes">Continuar</button><button class="secondary" id="no">Cancelar</button></div>`);$("#x").onclick=close;$("#no").onclick=close;$("#yes").onclick=yes}
+function categoriesModal(){
+ open(`<div class="modalhead"><h3>Categorias</h3><button class="close" id="x">×</button></div><div id="catlist">${cats.map(c=>`<div class="catrow"><input type="color" value="${esc(c.color)}" data-color="${esc(c.id)}"><span>${esc(c.name)}</span><button class="btn danger" data-catdel="${esc(c.id)}">Excluir</button></div>`).join("")||'<div class="empty">Nenhuma categoria criada.</div>'}</div><div class="modalactions"><button class="primary" id="newcat">+ Nova categoria</button><button class="secondary" id="backform">Voltar</button></div>`);
+ $("#x").onclick=close;$("#backform").onclick=()=>form(editing);
+ $("#newcat").onclick=()=>{inputBox("Nova categoria","Digite o nome da categoria.",name=>{if(cats.some(c=>c.name.toUpperCase()===name.toUpperCase()))return toast("Categoria já existe.");let c={id:uid(),name,color:palette[cats.length%palette.length]};cats.push(c);write(KP.cats,cats);log("CATEGORIA",`Criada: ${name}`);categoriesModal();render()})};
+ document.querySelectorAll("[data-color]").forEach(i=>i.onchange=()=>{let c=cats.find(x=>x.id===i.dataset.color);c.color=i.value;write(KP.cats,cats);log("CATEGORIA",`Cor alterada: ${c.name}`);render()});
+ document.querySelectorAll("[data-catdel]").forEach(b=>b.onclick=()=>{let c=cats.find(x=>x.id===b.dataset.catdel);if(products.some(p=>String(p.category).toUpperCase()===c.name.toUpperCase()))return toast("Categoria possui produtos.");cats=cats.filter(x=>x.id!==c.id);write(KP.cats,cats);log("CATEGORIA",`Excluída: ${c.name}`);categoriesModal();render()});
+}
+function inputBox(title,body,callback){open(`<div class="modalhead"><h3>${title}</h3><button class="close" id="x">×</button></div><p class="muted">${body}</p><div class="field"><label>Nome</label><input id="input"></div><div class="modalactions"><button class="primary" id="ok">Salvar</button><button class="secondary" id="no">Cancelar</button></div>`);$("#x").onclick=close;$("#no").onclick=close;$("#ok").onclick=()=>{let v=$("#input").value.trim();if(!v)return toast("Digite um nome.");close();callback(v)};$("#input").focus()}
+function historyModal(){open(`<div class="modalhead"><h3>Histórico</h3><button class="close" id="x">×</button></div><div class="notice">Registro local das operações do sistema.</div><div class="history">${history.length?history.map(h=>`<div class="event"><b>${esc(h.type)}</b><div>${esc(h.detail)}</div><div>${new Date(h.date).toLocaleString("pt-BR")}</div></div>`).join(""):'<div class="empty">Nenhum evento.</div>'}</div><div class="modalactions"><button class="dangerfull" id="clearh">Limpar histórico</button></div>`);$("#x").onclick=close;$("#clearh").onclick=()=>confirmBox("Limpar histórico?","Todos os registros locais do histórico serão apagados.",()=>{history=[];write(KP.history,history);historyModal()})}
+function trashModal(){open(`<div class="modalhead"><h3>Lixeira</h3><button class="close" id="x">×</button></div><div class="notice">Produtos excluídos ficam aqui até serem restaurados ou apagados definitivamente.</div><div class="history">${trash.length?trash.map(p=>`<div class="event"><b>${esc(p.name)}</b><div>${esc(p.code||"Sem código")} • ${money(p.price)}</div><div>Excluído em ${new Date(p.deletedAt).toLocaleString("pt-BR")}</div><div class="actions"><button class="btn" data-restore="${esc(p.id)}">Restaurar</button><button class="btn danger" data-hard="${esc(p.id)}">Excluir definitivamente</button></div></div>`).join(""):'<div class="empty">A lixeira está vazia.</div>'}</div>`);$("#x").onclick=close;
+ document.querySelectorAll("[data-restore]").forEach(b=>b.onclick=()=>{let p=trash.find(x=>x.id===b.dataset.restore);if(!p)return;let r={...p};delete r.deletedAt;products.unshift(r);trash=trash.filter(x=>x.id!==p.id);write(KP.products,products);write(KP.trash,trash);log("RESTAURAÇÃO",p.name);trashModal();render();toast("Produto restaurado.")});
+ document.querySelectorAll("[data-hard]").forEach(b=>b.onclick=()=>{let p=trash.find(x=>x.id===b.dataset.hard);confirmBox("Excluir definitivamente?",`<b>${esc(p.name)}</b> não poderá ser restaurado depois.`,()=>{trash=trash.filter(x=>x.id!==p.id);write(KP.trash,trash);log("EXCLUSÃO DEFINITIVA",p.name);trashModal();toast("Excluído definitivamente.")})});
+}
+function exportJSON(){let blob=new Blob([JSON.stringify({version:APPVER,exportedAt:new Date().toISOString(),categories:cats,products},null,2)],{type:"application/json"});download(blob,"koda-pesquisa-backup.json");log("EXPORTAÇÃO",`JSON — ${products.length} produtos`)}
+function exportCSV(){let rows=[["codigo","nome","preco","categoria","marca"],...products.map(p=>[p.code||"",p.name,p.price,p.category||"",p.brand||""])];let csv="\ufeff"+rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(";")).join("\n");download(new Blob([csv],{type:"text/csv;charset=utf-8"}),"koda-pesquisa-produtos.csv");log("EXPORTAÇÃO",`CSV — ${products.length} produtos`)}
+function download(blob,name){let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
+function importFile(){ $("#file").value="";$("#file").click() }
+$("#file").onchange=async e=>{let f=e.target.files[0];if(!f)return;let text=await f.text(),arr;
+ if(f.name.toLowerCase().endsWith(".json")){try{let d=JSON.parse(text);arr=Array.isArray(d)?d:(Array.isArray(d.products)?d.products:(d.categorias&&typeof d.categorias==="object"?flattenCategorias(d.categorias):null))}catch(err){return toast("JSON inválido.")}}
+ else{let lines=text.replace(/^\ufeff/,"").split(/\r?\n/).filter(Boolean);let sep=lines[0].includes(";")?";":",";let headers=parseCSV(lines.shift(),sep).map(x=>x.toLowerCase());arr=lines.map(l=>{let a=parseCSV(l,sep);let o={};headers.forEach((h,i)=>o[h]=a[i]??"");return o})}
+ try{
+ if(!Array.isArray(arr))return toast("Nenhum produto encontrado.");let imported=arr.map(p=>({id:uid(),name:String(p.name??p.nome??"").trim(),code:String(p.code??p.codigo??"").trim(),price:normalizePrice(p.price??p.preco),category:String(p.category??p.categoria??"").trim(),brand:String(p.brand??p.marca??"").trim()})).filter(p=>p.name&&Number.isFinite(p.price)&&p.price>=0);
+ if(!imported.length)return toast("Nenhum registro válido.");let before=products.length;products.push(...imported);write(KP.products,products);
+ imported.forEach(p=>{if(p.category&&!cats.some(c=>c.name.toUpperCase()===p.category.toUpperCase()))cats.push({id:uid(),name:p.category,color:palette[cats.length%palette.length]})});write(KP.cats,cats);log("IMPORTAÇÃO",`${imported.length} produtos adicionados. Base anterior: ${before}.`);render();toast(`${imported.length} produtos importados.`);
+ }catch(err){toast("Não foi possível importar o arquivo.")}}
+function flattenCategorias(obj){let out=[];for(let catKey in obj){let v=obj[catKey];if(Array.isArray(v)){v.forEach(p=>out.push({...p,categoria:p.categoria??p.category??catKey}))}else if(v&&typeof v==="object"){for(let brandKey in v){let arr=v[brandKey];if(Array.isArray(arr))arr.forEach(p=>out.push({...p,categoria:p.categoria??p.category??catKey,marca:p.marca??p.brand??brandKey}))}}}return out}
+function parseCSV(line,sep){let out=[],cur="",quote=false;for(let i=0;i<line.length;i++){let c=line[i];if(c==='"'&&line[i+1]==='"'){cur+='"';i++;continue}if(c==='"'){quote=!quote;continue}if(c===sep&&!quote){out.push(cur);cur="";continue}cur+=c}out.push(cur);return out}
+function storageSize(){let bytes=0;for(let k in localStorage)if(Object.prototype.hasOwnProperty.call(localStorage,k)&&k.startsWith("koda_pesquisa"))bytes+=(localStorage[k]||"").length+k.length;if(bytes<1024)return bytes+" B";if(bytes<1024*1024)return (bytes/1024).toFixed(1)+" KB";return (bytes/1024/1024).toFixed(2)+" MB"}
+function diagModal(){let ok=(()=>{try{return localStorage.getItem(KP.products)!==null||products.length===0}catch{return false}})();
+ open(`<div class="modalhead"><h3>Diagnóstico</h3><button class="close" id="x">×</button></div><div class="notice"><b>Versão atual:</b> ${APPVER}<br><b>Produtos:</b> ${products.length}<br><b>Categorias:</b> ${cats.length}<br><b>Eventos no histórico:</b> ${history.length}<br><b>Itens na lixeira:</b> ${trash.length}<br><b>Banco local:</b> ${ok?"lido normalmente":"não foi possível confirmar leitura"}<br><b>Tamanho aproximado dos dados:</b> ${storageSize()}</div><div class="modalactions"><button class="secondary" id="backtools">Voltar</button></div>`);
+ $("#x").onclick=close;$("#backtools").onclick=toolsModal}
+function updateAccountUI(){$("#accountBtn").classList.toggle("on",!!cloudUser);$("#accountBtn").title=cloudUser?`Conectado: ${cloudUser.email||cloudUser.displayName||"conta"}`:"Conta"}
+async function initCloud(){
+ let ok=await KODA_LIBS_READY;
+ if(!ok||typeof firebase==="undefined"||!firebase.apps||!firebase.apps.length)return;
+ cloudReady=true;
+ try{await firebase.auth().getRedirectResult()}catch(err){toast("Não foi possível concluir o login.")}
+ firebase.auth().onAuthStateChanged(async user=>{
+  cloudUser=user;updateAccountUI();
+  if(user){await syncOnLogin(user)}else{if(unsubSnapshot){unsubSnapshot();unsubSnapshot=null}}
+ });
+}
+function listenCloud(uid){
+ if(unsubSnapshot)unsubSnapshot();
+ unsubSnapshot=firebase.firestore().collection("usuarios").doc(uid).onSnapshot(snap=>{
+  if(!snap.exists||snap.metadata.hasPendingWrites)return;
+  let d=snap.data();
+  if(Array.isArray(d.products))products=d.products;
+  if(Array.isArray(d.cats))cats=d.cats;
+  if(Array.isArray(d.history))history=d.history;
+  if(Array.isArray(d.trash))trash=d.trash;
+  localStorage.setItem(KP.products,JSON.stringify(products));localStorage.setItem(KP.cats,JSON.stringify(cats));localStorage.setItem(KP.history,JSON.stringify(history));localStorage.setItem(KP.trash,JSON.stringify(trash));
+  render();toast("Dados atualizados a partir da nuvem.");
+ },()=>toast("Erro ao sincronizar com a nuvem."));
+}
+async function syncOnLogin(user){
+ try{
+  let ref=firebase.firestore().collection("usuarios").doc(user.uid),snap=await ref.get();
+  let cloudData=snap.exists?snap.data():null;
+  let hasCloud=!!(cloudData&&Array.isArray(cloudData.products)&&cloudData.products.length);
+  let hasLocal=products.length>0;
+  if(hasCloud&&hasLocal){accountMergeModal(cloudData,user);return}
+  if(hasCloud&&!hasLocal){products=cloudData.products||[];cats=cloudData.cats||[];history=cloudData.history||[];trash=cloudData.trash||[];localStorage.setItem(KP.products,JSON.stringify(products));localStorage.setItem(KP.cats,JSON.stringify(cats));localStorage.setItem(KP.history,JSON.stringify(history));localStorage.setItem(KP.trash,JSON.stringify(trash));render();toast("Produtos da sua conta foram carregados.")}
+  else if(!hasCloud&&hasLocal){await ref.set({products,cats,history,trash,updatedAt:new Date().toISOString()},{merge:true});toast("Produtos deste aparelho foram enviados para a conta.")}
+  listenCloud(user.uid);
+ }catch(err){toast("Não foi possível sincronizar com a nuvem agora.")}
+}
+function accountMergeModal(cloudData,user){
+ open(`<div class="modalhead"><h3>Conflito de dados</h3></div><div class="notice">Encontramos produtos salvos neste aparelho <b>e</b> na sua conta na nuvem (${(cloudData.products||[]).length} produto(s) na conta). Escolha como continuar — nada será apagado sem sua confirmação.</div><div class="modalactions"><button class="primary" id="useCloud">Usar dados da conta (nuvem)</button><button class="secondary" id="useLocal">Manter dados deste aparelho e enviar para a conta</button><button class="secondary" id="cancelMerge">Desconectar sem sincronizar</button></div>`);
+ $("#useCloud").onclick=()=>{products=cloudData.products||[];cats=cloudData.cats||[];history=cloudData.history||[];trash=cloudData.trash||[];localStorage.setItem(KP.products,JSON.stringify(products));localStorage.setItem(KP.cats,JSON.stringify(cats));localStorage.setItem(KP.history,JSON.stringify(history));localStorage.setItem(KP.trash,JSON.stringify(trash));close();render();listenCloud(user.uid);toast("Dados da conta carregados neste aparelho.")};
+ $("#useLocal").onclick=async()=>{let ref=firebase.firestore().collection("usuarios").doc(user.uid);await ref.set({products,cats,history,trash,updatedAt:new Date().toISOString()},{merge:false});close();listenCloud(user.uid);toast("Dados deste aparelho enviados para a conta.")};
+ $("#cancelMerge").onclick=()=>{close();firebase.auth().signOut()};
+}
+function loginGoogle(){
+ if(!cloudReady)return toast("Conexão de conta ainda não configurada neste sistema. Veja o README.");
+ let provider=new firebase.auth.GoogleAuthProvider();
+ firebase.auth().signInWithRedirect(provider).catch(()=>toast("Não foi possível iniciar o login."));
+}
+function logout(){firebase.auth().signOut();close();toast("Conta desconectada. Os dados continuam salvos neste aparelho.")}
+function accountModal(){
+ if(cloudUser){
+  open(`<div class="modalhead"><h3>Conta conectada</h3><button class="close" id="x">×</button></div><div class="notice"><b>${esc(cloudUser.displayName||"Conectado")}</b><br>${esc(cloudUser.email||"")}<br><br>Seus produtos estão sincronizados com a nuvem e disponíveis em qualquer aparelho conectado a esta mesma conta.</div><div class="modalactions"><button class="dangerfull" id="logoutBtn">Desconectar conta</button></div>`);
+  $("#x").onclick=close;$("#logoutBtn").onclick=logout;
+ }else{
+  open(`<div class="modalhead"><h3>Conectar conta</h3><button class="close" id="x">×</button></div><div class="notice">Conecte-se com sua conta Google para sincronizar seus produtos entre aparelhos diferentes. Sem conexão, os dados continuam salvos apenas neste aparelho.</div><div class="modalactions"><button class="primary" id="googleBtn">Entrar com Google</button><button class="secondary" id="x2">Continuar sem conta</button></div>`);
+  $("#x").onclick=close;$("#x2").onclick=close;$("#googleBtn").onclick=loginGoogle;
+ }
+}
+const TUTORIAL_STEPS=[
+ ["Pesquisar","Use a barra de busca para pesquisar por nome, código ou preço. Os resultados atualizam enquanto você digita. Toque no × para limpar."],
+ ["Filtrar por categoria","Toque em um chip abaixo da busca para ver só os produtos daquela categoria. Toque em TODAS para voltar a ver tudo."],
+ ["Cadastrar","Toque no botão + no canto da tela. Nome e preço são obrigatórios; código e categoria são opcionais."],
+ ["Editar","Toque no nome do produto na lista, ou no botão Editar do card, para alterar qualquer campo."],
+ ["Excluir e Lixeira","Excluir move o produto para a Lixeira, não apaga direto. Na Lixeira (menu Ferramentas) você pode restaurar ou excluir definitivamente."],
+ ["Categorias","Em Ferramentas > Categorias você cria categorias, define uma cor para cada uma e a cor aparece nos produtos e nos filtros."],
+ ["Histórico","Em Ferramentas > Histórico fica registrada toda alteração feita no sistema: cadastros, edições, exclusões, importações e mais."],
+ ["Importar","Em Ferramentas > Importar você pode enviar um arquivo JSON ou CSV com produtos. Eles são somados à base atual, sem apagar o que já existe."],
+ ["Exportar","Em Ferramentas > Exportar JSON/CSV você gera um backup dos seus produtos para guardar ou transferir."],
+ ["Diagnóstico","Em Ferramentas > Diagnóstico você vê a versão do sistema e a situação atual do banco local."],
+ ["Conectar conta","Toque no ícone de pessoa no topo para entrar com sua conta Google. Assim seus produtos ficam disponíveis em qualquer aparelho conectado à mesma conta."],
+ ["Tema claro/escuro","Toque no ícone da lua no topo para alternar entre tema claro e escuro."]
+];
+function tutorialModal(){open(`<div class="modalhead"><h3>Tutorial do sistema</h3><button class="close" id="x">×</button></div><div class="notice">Guia completo de uso do KODA PESQUISA.</div><div>${TUTORIAL_STEPS.map((s,i)=>`<div class="tutstep"><div class="tutnum">${i+1}</div><div class="tutbody"><b>${esc(s[0])}</b><div>${esc(s[1])}</div></div></div>`).join("")}</div><div class="modalactions"><button class="secondary" id="backtools2">Voltar</button></div>`);$("#x").onclick=close;$("#backtools2").onclick=toolsModal}
+function toolsModal(){open(`<div class="modalhead"><h3>Ferramentas</h3><button class="close" id="x">×</button></div><div class="menu"><button id="imp"><b>Importar</b><small>JSON ou CSV</small></button><button id="json"><b>Exportar JSON</b><small>Backup completo</small></button><button id="csv"><b>Exportar CSV</b><small>Produtos em tabela</small></button><button id="hist"><b>Histórico</b><small>${history.length} eventos</small></button><button id="trash"><b>Lixeira</b><small>${trash.length} produto(s)</small></button><button id="cats"><b>Categorias</b><small>Nome e cor</small></button><button id="diag"><b>Diagnóstico</b><small>Estado do sistema</small></button><button id="tut"><b>Tutorial</b><small>Como usar o sistema</small></button></div><div class="notice" style="margin-top:12px"><b>Armazenamento:</b> local neste aparelho, e sincronizado com a nuvem quando uma conta está conectada (ícone de pessoa no topo).</div>`);$("#x").onclick=close;$("#imp").onclick=()=>{close();importFile()};$("#json").onclick=()=>{close();exportJSON();toast("Backup JSON exportado.")};$("#csv").onclick=()=>{close();exportCSV();toast("CSV exportado.")};$("#hist").onclick=historyModal;$("#trash").onclick=trashModal;$("#cats").onclick=categoriesModal;$("#diag").onclick=diagModal;$("#tut").onclick=tutorialModal}
+$("#q").oninput=render;$("#clear").onclick=()=>{$("#q").value="";render();$("#q").focus()};$("#add").onclick=()=>form();$("#menuBtn").onclick=toolsModal;$("#accountBtn").onclick=accountModal;$("#themeBtn").onclick=()=>{document.body.classList.toggle("dark");localStorage.setItem(KP.theme,document.body.classList.contains("dark")?"dark":"light")};
+document.addEventListener("click",e=>{let c=e.target.closest("[data-cat]"),ed=e.target.closest("[data-edit]"),del=e.target.closest("[data-del]");if(c){active=c.dataset.cat;render()}if(ed)form(ed.dataset.edit);if(del)remove(del.dataset.del)});
+$("#back").onclick=e=>{if(e.target.id==="back")close()};document.addEventListener("keydown",e=>{if(e.key==="Escape")close()});
+if(localStorage.getItem(KP.theme)==="dark")document.body.classList.add("dark");
+if(!cats.length){cats=[];write(KP.cats,cats)}
+render();
+updateAccountUI();
+initCloud();
+</script>
+</body>
+</html>
